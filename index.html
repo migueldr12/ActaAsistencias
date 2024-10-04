@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="index.js"></script>
+    <title>Document</title>
+</head>
+<body>
+  <h2>Selecciona dos fechas</h2>
+    
+  <form action="#">
+      <label for="startDate">Fecha de inicio:</label>
+      <input type="date" id="startDate" name="startDate" required>
+      <br><br>
+      
+      <label for="endDate">Fecha de fin:</label>
+      <input type="date" id="endDate" name="endDate" required>
+      <br><br>
+
+      <label for="inhabilDates">Fechas inhabilitadas (separadas por comas):</label>
+      <input type="text" id="inhabilDates" name="inhabilDates" placeholder="YYYY-MM-DD, YYYY-MM-DD">
+      <br><br>
+
+      <button type="button" onclick="calcularSemestre()">Calcular Rango de Días</button>
+  </form>
+  <p id="semestreResult"></p>
+  
+</body>
+</html>
