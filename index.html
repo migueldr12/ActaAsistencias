@@ -49,6 +49,7 @@
                 </v-col>
                 <v-col cols="12" md="4">
                   <v-text-field
+                    id="startDate"
                     v-model="periodoInicio"
                     label="Inicio del Periodo"
                     type="date"
@@ -57,6 +58,7 @@
                 </v-col>
                 <v-col cols="12" md="4">
                   <v-text-field
+                    id="endDate"
                     v-model="periodoFin"
                     label="Fin del Periodo"
                     type="date"
@@ -130,7 +132,7 @@
                 </v-col>
               </v-row>
               <div class="text-center mt-3">
-                <v-btn @click="generarAsistencia">Generar Asistencia</v-btn>
+                <v-btn onclick="calcularSemestre()">Generar Asistencia</v-btn>
               </div>
             </v-container>
           </v-form>
@@ -179,7 +181,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.js"></script>
-
+    <script src="/index.js"></script>
     <script>
       new Vue({
         el: "#app",
