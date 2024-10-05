@@ -69,22 +69,23 @@ function calcularSemestre() {
 
     diasTimeStamp.forEach((ts) => {
       const dia = new Date(ts).getDay();
+      const numDia = new Date(ts).getDate();
       if (dia !== 0 && dia !== 6) {
         switch (dia) {
           case 1:
-            agregarDiasAlSemestre(dia, horasLunes);
+            agregarDiasAlSemestre(numDia, horasLunes);
             break;
           case 2:
-            agregarDiasAlSemestre(dia, horasMartes);
+            agregarDiasAlSemestre(numDia, horasMartes);
             break;
           case 3:
-            agregarDiasAlSemestre(dia, horasMiercoles);
+            agregarDiasAlSemestre(numDia, horasMiercoles);
             break;
           case 4:
-            agregarDiasAlSemestre(dia, horasJueves);
+            agregarDiasAlSemestre(numDia, horasJueves);
             break;
           case 5:
-            agregarDiasAlSemestre(dia, horasViernes);
+            agregarDiasAlSemestre(numDia, horasViernes);
             break;
         }
       }
