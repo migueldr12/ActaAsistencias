@@ -10,6 +10,10 @@ function calcularSemestre() {
   // );
   // const horasJueves = Number(document.getElementById("horasJueves").value);
   // const horasViernes = Number(document.getElementById("horasViernes").value);
+
+
+
+  // * Declaramos las variables para los datos ingresados
   const horasLunes = 1;
   const horasMartes = 2;
   const horasMiercoles = 4;
@@ -18,7 +22,29 @@ function calcularSemestre() {
 
   let fecha1 = new Date(startDateInput + "T00:00"); // Aseguramos que sera la hora local y tomara las de UTC
   const fecha2 = new Date(endDateInput + "T00:00");
-  //Arreglo que tendra todos los timesatmps de todos los dias de la fecha 1 a la 2
+  // * Declaramos las variables para las vacaciónes intermedias:
+  let vacaciones1 = new Date(startDateInput + "T00:00");
+  let vacaciones2 = new Date(startDateInput + "T00:00");
+
+
+  const vacaciones = [
+    {start: vacaciones1, end:vacaciones2},
+    {start: vacaciones1, end:vacaciones2},
+  ];
+
+
+  // ? Verificamos si la fecha se encuntra dentro del rango de vaciónes:
+  const sonVacaciónes = (fecha) => {
+    return vacaciones.some(rango => {
+      return fecha >= rango.start && fecha <= rango.end;
+    })
+  }
+
+  
+
+  // ? Sección para los arreglos
+  
+  // * Arreglo que tendra todos los timesatmps de todos los dias de la fecha 1 a la 2
   const diasTimeStamp = [];
   // Arrglo que contendra todos los dias del semestre
   const diaSemestre = [];
@@ -32,6 +58,9 @@ function calcularSemestre() {
     }
   };
 
+
+  // ? Sección de las funciónes
+  // 
   const setearTabla = function (alumnos) {
     tbl.push([["Alumnos", ...diaSemestre]]);
     let row = [];
@@ -47,7 +76,10 @@ function calcularSemestre() {
   // const semestre = new Date(fecha2 - fecha1);
   // console.log(semestre);
 
-  //
+
+
+
+  // ? Sección del código con la lógica
   if (fecha1 && fecha2) {
     //! Nos aseguramos que no son el mismo día:
     if (fecha2 < fecha1) {
@@ -68,34 +100,47 @@ function calcularSemestre() {
     }
 
     diasTimeStamp.forEach((ts) => {
-      const dia = new Date(ts).getDay();
-      const numDia = new Date(ts).getDate();
-      if (dia !== 0 && dia !== 6) {
-        switch (dia) {
-          case 1:
-            agregarDiasAlSemestre(numDia, horasLunes);
-            break;
-          case 2:
-            agregarDiasAlSemestre(numDia, horasMartes);
-            break;
-          case 3:
-            agregarDiasAlSemestre(numDia, horasMiercoles);
-            break;
-          case 4:
-            agregarDiasAlSemestre(numDia, horasJueves);
-            break;
-          case 5:
-            agregarDiasAlSemestre(numDia, horasViernes);
-            break;
+      if (!sonVacaciónes(fecha1)) {
+        const dia = new Date(ts).getDay();
+        const numDia = new Date(ts).getDate();
+  
+        if (dia !== 0 && dia !== 6) {
+          switch (dia) {
+            case 1:
+              agregarDiasAlSemestre(numDia, horasLunes);
+              break;
+            case 2:
+              agregarDiasAlSemestre(numDia, horasMartes);
+              break;
+            case 3:
+              agregarDiasAlSemestre(numDia, horasMiercoles);
+              break;
+            case 4:
+              agregarDiasAlSemestre(numDia, horasJueves);
+              break;
+            case 5:
+              agregarDiasAlSemestre(numDia, horasViernes);
+              break;
+          }
         }
       }
     });
 
+
+    // ? Mostramos los datos de los areglos para generar la tabla
     console.log(diaSemestre);
 
     setearTabla(alumnos);
 
     console.log(tbl);
+
+
+
+
+
+
+
+
     // // ? Almacenamos los datos inhabiles:
     // const inhabilDias = inHabilesInput
     //   .split(",")
@@ -158,6 +203,8 @@ new Vue({
         };
     },
     methods: {
+      // ? Agregamso la función principal que se llama en el HTML
+      generarAsistencia(){},
         descargarPDF() {
             try {
                 const { jsPDF } = window.jspdf;
@@ -239,6 +286,12 @@ new Vue({
         }
     }
 });
+
+
+
+
+
+
 /*
 // Creamos la función calcular el semestre:
 function calcularSemestre() {        
