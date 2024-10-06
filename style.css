@@ -1,16 +1,15 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #e8f5e9;
+    background-color: #ededed;
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #388E3C;
-    color: white;
+    background-color: #DDDDDD;
+    color: #000000;
     padding: 1rem;
     text-align: center;
-    border-bottom: 5px solid #2E7D32;
 }
 
 #main-content {
@@ -22,10 +21,10 @@ header {
 }
 
 #floating-form {
-    background: #A5D6A7;
+    background: white;
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     width: 100%;
     max-width: 800px;
     margin-top: 20px;
@@ -55,16 +54,15 @@ tr:nth-child(even) {
 }
 
 .v-btn {
-    background-color: #388E3C !important;
+    background-color: #999999 !important;
     color: white !important;
 }
 
 .v-btn:hover {
-    background-color: #2E7D32 !important;
+    background-color: #676767 !important;
 }
 
 .v-text-field input {
-    background-color: #A5D6A7 !important;
     border: none;
     border-radius: 5px;
     color: #000000;
@@ -75,7 +73,6 @@ tr:nth-child(even) {
 }
 
 .v-select .v-input__control {
-    background-color: #A5D6A7 !important;
     border: none;
     border-radius: 5px;
 }
@@ -94,7 +91,7 @@ tr:nth-child(even) {
 
 /* Estilo para la tabla */
 .table {
-    background-color: #C8E6C9;
+    background-color: white;
     border-radius: 10px;
     overflow: hidden;
     /* Para redondear esquinas */
@@ -109,7 +106,7 @@ tr:nth-child(even) {
 }
 
 .table th {
-    background-color: #66BB6A;
+    background-color: #999999;
     /* Color de fondo de encabezados */
     color: white;
     /* Color de texto de encabezados */
@@ -118,6 +115,23 @@ tr:nth-child(even) {
 }
 
 .table td {
-    background-color: #E8F5E9;
+    background-color: white;
     /* Color de fondo para celdas */
+}
+
+#pdf-button {
+    margin-bottom: 15px;
+}
+
+.left-button {
+    position: fixed;
+    left: 0;
+    margin-bottom: 15px;
+}
+
+.center-button {
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    text-align: center;
 }
