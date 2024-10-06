@@ -1,6 +1,7 @@
 # Requerimientos
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/5a0ed89b-3c40-4510-a618-9e9fde8b74b2/06494c42-7678-4d0f-9170-1bca82efb2ab/image.png)
+![Requerimientos](Requerimientos.png)
+
 
 
 ## Alcance
