@@ -5,14 +5,19 @@ new Vue({
   data() {
     return {
       showForm: true,
-      horasPorDia: "",
+      Lunes: "",
+      Martes: "",
+      Miercoles: "",
+      Jueves: "",
+      Viernes: "",
       periodoInicio: "",
       periodoFin: "",
       periodoEvaluaciones: "",
       vacaciones: "",
       inicioVacaciones: "",
       finVacaciones: "",
-      diasAsueto: "",
+      diasAsueto: 0,
+      diasAsuetoInputs: [],
       cantidadAlumnos: "",
       nombreGrupo: "",
       nombreMateria: "",
@@ -20,11 +25,27 @@ new Vue({
       alumnos: "",
       dias: "",
       diasAsueto: [],
-      vacacionesOptions: ["Si", "No"],
+      vacacionesOptions: ["Sí", "No"],
       horasPorDiaOptions: [0, 1, 2, 3, 4, 5],
     };
   },
   methods: {
+    generarInputsAsueto() {
+      // Si ya hay datos, reiniciar el arreglo
+      this.diasAsuetoInputs = [];
+
+      // Verificar si el valor de "diasAsueto" excede el límite de 10
+      if (this.diasAsueto > 10) {
+        // Mostrar un mensaje de advertencia
+        alert("No es posible tener más de 10 días de asueto.");
+        return; // Salir de la función sin generar más inputs
+      }
+
+      // Generar inputs dependiendo del valor de "diasAsueto"
+      for (let i = 0; i < this.diasAsueto; i++) {
+        this.diasAsuetoInputs.push({ fecha: "", descripcion: "" });
+      }
+    },
     descargarPDF() {
       try {
         const { jsPDF } = window.jspdf;
