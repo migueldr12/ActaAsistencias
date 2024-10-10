@@ -35,6 +35,8 @@ table {
     background-color: #C8E6C9;
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
+    /* Asegura que las columnas tengan un tamaño uniforme */
 }
 
 th,
@@ -67,9 +69,7 @@ tr:nth-child(even) {
     border-radius: 5px;
     color: #000000;
     box-shadow: none;
-    /* Elimina el sombreado */
     outline: none;
-    /* Elimina el contorno al seleccionar */
 }
 
 .v-select .v-input__control {
@@ -94,29 +94,32 @@ tr:nth-child(even) {
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
-    /* Para redondear esquinas */
     margin-top: 20px;
+    width: 100%;
+    /* Asegura que la tabla ocupe todo el ancho disponible */
 }
 
 /* Estilo para las celdas de la tabla */
 .table th,
 .table td {
     border: none;
-    /* Quitar borde de celdas */
 }
 
 .table th {
     background-color: #999999;
-    /* Color de fondo de encabezados */
     color: white;
-    /* Color de texto de encabezados */
     font-weight: bold;
-    /* Negrita para encabezados */
 }
 
 .table td {
     background-color: white;
-    /* Color de fondo para celdas */
+}
+
+/* Asegurar que la tabla ocupe todo el ancho disponible y el contenido se ajuste */
+.table th,
+.table td {
+    white-space: normal;
+    /* Permite que el texto se ajuste en varias líneas si es necesario */
 }
 
 #pdf-button {
