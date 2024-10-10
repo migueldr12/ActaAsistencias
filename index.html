@@ -110,34 +110,62 @@
                     </v-col>
                   </v-row>
                 </div>
-                <v-col cols="12" md="4">
-                  <v-text-field
-                    id="startDate"
-                    v-model="periodoInicio"
-                    label="Inicio del Periodo"
-                    type="date"
-                    required
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="4">
-                  <v-text-field
-                    id="endDate"
-                    v-model="periodoFin"
-                    label="Fin del Periodo"
-                    type="date"
-                    required
-                  ></v-text-field>
-                </v-col>
               </v-row>
+              <h6>Evaluaciónes</h6>
               <v-row>
                 <v-col cols="12" md="4">
                   <v-text-field
-                    v-model="periodoEvaluaciones"
+                    v-model="primeraEvaluacion"
                     label="Fecha de Evaluaciones"
                     type="date"
                     required
                   ></v-text-field>
                 </v-col>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="segundaEvaluacion"
+                    label="Fecha de Evaluaciones"
+                    type="date"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="terceraEvaluacion"
+                    label="Fecha de Evaluaciones"
+                    type="date"
+                    required
+                  ></v-text-field>
+                </v-col>
+                
+              <h6>Curso - Vacaciones</h6>
+              <v-col cols="12" md="4">
+                <v-text-field
+                  id="startDate"
+                  v-model="periodoInicio"
+                  label="Inicio del Periodo"
+                  type="date"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" md="4">
+                <v-text-field
+                  id="endDate"
+                  v-model="periodoFin"
+                  label="Fin del Periodo"
+                  type="date"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" md="4">
+                <v-text-field
+                  v-model="diasAsueto"
+                  label="Días de Asueto"
+                  type="number"
+                  @input="generarInputsAsueto"
+                  required
+                ></v-text-field>
+              </v-col>
                 <v-col cols="12" md="4">
                   <v-select
                     v-model="vacaciones"
@@ -164,21 +192,11 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col cols="12" md="4">
-                  <v-text-field
-                    v-model="diasAsueto"
-                    label="Días de Asueto"
-                    type="number"
-                    @input="generarInputsAsueto"
-                    required
-                  ></v-text-field>
-                </v-col>
                 <v-col
                   cols="12"
                   md="4"
                   v-for="(asueto, index) in diasAsuetoInputs"
-                  :key="index"
-                >
+                  :key="index">
                   <v-text-field
                     v-model="asueto.fecha"
                     label="Fecha del Día de Asueto"
@@ -186,6 +204,12 @@
                     required
                   ></v-text-field>
                 </v-col>
+              </v-row>
+
+              
+                
+              <h6>Datos de la clase</h6>
+              <v-row>
                 <v-col cols="12" md="4">
                   <v-text-field
                     v-model="cantidadAlumnos"
@@ -201,8 +225,6 @@
                     required
                   ></v-text-field>
                 </v-col>
-              </v-row>
-              <v-row>
                 <v-col cols="12" md="4">
                   <v-text-field
                     v-model="nombreMateria"
@@ -252,10 +274,13 @@
                     {{ asistencia }}
                   </td>
                 </tr>
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
+
+        
       </div>
     </div>
 

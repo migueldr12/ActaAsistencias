@@ -12,7 +12,11 @@ new Vue({
       viernes: "",
       periodoInicio: "",
       periodoFin: "",
-      periodoEvaluaciones: "",
+      
+      primeraEvaluacion: "",
+      segundaEvaluacion: "",
+      terceraEvaluacion: "",
+
       vacaciones: "",
       inicioVacaciones: "",
       finVacaciones: "",
@@ -43,8 +47,10 @@ new Vue({
       // Generar inputs dependiendo del valor de "diasAsueto"
       for (let i = 0; i < this.diasAsueto; i++) {
         this.diasAsuetoInputs.push({ fecha: "", descripcion: "" });
-      }
+      };
     },
+    
+
     descargarPDF() {
       try {
         const { jsPDF } = window.jspdf;
@@ -90,11 +96,11 @@ new Vue({
           startY: 60,
           styles: {
             fontSize: 5.4, // Tamaño de fuente para los datos de la tabla en el PDF
-            cellPadding: 5,
+            cellPadding: 5, // Relleno interno
             valign: "middle",
             halign: "center",
             lineColor: [44, 62, 80],
-            lineWidth: 0.1,
+            lineWidth: 5,
             overflow: "linebreak", // Evita que las palabras se corten
           },
           headStyles: {
@@ -129,6 +135,11 @@ new Vue({
         console.error("Error al generar el PDF:", error);
       }
     },
+    
+    // Metodo para obtener el día del mes d euna fecha
+    getDayFromDate(date) {
+      return date ? new Date(date).getDate() : null;
+    },
     mostrarTabla() {
       // Arreglos y variables de configuración
       const diasTimeStamp = []; // ? Arreglo las fechas de cada día de la lísta
@@ -144,16 +155,28 @@ new Vue({
       const endDateInput = this.periodoFin;
 
       const startVacaciónes = this.inicioVacaciones;
-      const endVacaciónes = this.finVacaciones;
+      const endVacaciónes = this.finVacaciones
       const hayVacaciones = this.vacaciones;
+
+      // * Obtenemos las fechas de las evaluaciónes:
+      const primeraFecha = this.getDayFromDate(this.primeraEvaluacion) || '07/10/2024';
+      const segundaFecha = this.getDayFromDate(this.segundaEvaluacion) || '14/10/2024';;
+      const terceraFecha = this.getDayFromDate(this.terceraEvaluacion) || '21/11/2024';
 
       console.log(hayVacaciones);
 
-      const horasLunes = +this.lunes || 0;
-      const horasMartes = +this.martes || 0;
-      const horasMiercoles = +this.miercoles || 0;
-      const horasJueves = +this.jueves || 0;
-      const horasViernes = +this.viernes || 0;
+      // TODO Agrega esto:
+      // const horasLunes = +this.lunes || 0;
+      // const horasMartes = +this.martes || 0;
+      // const horasMiercoles = +this.miercoles || 0;
+      // const horasJueves = +this.jueves || 0;
+      // const horasViernes = +this.viernes || 0;
+
+      const horasLunes = +this.lunes || 1;
+      const horasMartes = +this.martes || 1;
+      const horasMiercoles = +this.miercoles || 1;
+      const horasJueves = +this.jueves || 1;
+      const horasViernes = +this.viernes || 1;
 
       const diasAsueto = [...this.diasAsuetoInputs];
 
@@ -245,9 +268,25 @@ new Vue({
         // diasTimeStamp.forEach((ts) => {
         // ? Ahora utilzaremos el arreglo con los días que no se filtraron
         diasFinales.forEach((ts) => {
-          const dia = new Date(ts).getDay();
-          const numDia = new Date(ts).getDate();
+          const dia = new Date(ts).getDay();  // 
+          const numDia = new Date(ts).getDate();  // * Variable con la informaicón de los días en la iteración
+          
+          // * Almacenamos los días de evaluaciónes 
           if (dia !== 0 && dia !== 6) {
+            // Almacenamos los días de evaluación
+            if (numDia == primeraFecha) {
+              // diaSemestre.push("E1:(${numDia})");
+              diaSemestre.push("E1");
+            } else if (numDia == segundaFecha) {
+              // diaSemestre.push("E2:(${numDia})");
+              diaSemestre.push("E2");
+            } else if (numDia == segundaFecha) {
+              // diaSemestre.push("E3:(${numDia})");
+              diaSemestre.push("E3");
+            } else {
+              diaSemestre.push(numDia);
+            }
+  
             // Excluir fines de semana
             switch (dia) {
               case 1:
