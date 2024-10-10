@@ -70,15 +70,15 @@
                   <v-row>
                     <v-col cols="12" md="2">
                       <v-select
-                        v-model="Lunes"
+                        v-model="lunes"
                         :items="horasPorDiaOptions"
-                        label="Lunes"
+                        label="lunes"
                         required
                       ></v-select>
                     </v-col>
                     <v-col cols="12" md="2">
                       <v-select
-                        v-model="Martes"
+                        v-model="martes"
                         :items="horasPorDiaOptions"
                         label="Martes"
                         required
@@ -86,7 +86,7 @@
                     </v-col>
                     <v-col cols="12" md="2">
                       <v-select
-                        v-model="Miercoles"
+                        v-model="miercoles"
                         :items="horasPorDiaOptions"
                         label="Miercoles"
                         required
@@ -94,7 +94,7 @@
                     </v-col>
                     <v-col cols="12" md="2">
                       <v-select
-                        v-model="Jueves"
+                        v-model="jueves"
                         :items="horasPorDiaOptions"
                         label="Jueves"
                         required
@@ -102,7 +102,7 @@
                     </v-col>
                     <v-col cols="12" md="2">
                       <v-select
-                        v-model="Viernes"
+                        v-model="viernes"
                         :items="horasPorDiaOptions"
                         label="Viernes"
                         required
@@ -146,7 +146,7 @@
                     required
                   ></v-select>
                 </v-col>
-                <v-col cols="12" md="4" v-if="vacaciones === 'Sí'">
+                <v-col cols="12" md="4" v-if="vacaciones === 'Si'">
                   <v-text-field
                     v-model="inicioVacaciones"
                     label="Inicio de Vacaciones"
@@ -154,7 +154,7 @@
                     required
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" md="4" v-if="vacaciones === 'Sí'">
+                <v-col cols="12" md="4" v-if="vacaciones === 'Si'">
                   <v-text-field
                     v-model="finVacaciones"
                     label="Fin de Vacaciones"

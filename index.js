@@ -5,18 +5,17 @@ new Vue({
   data() {
     return {
       showForm: true,
-      Lunes: "",
-      Martes: "",
-      Miercoles: "",
-      Jueves: "",
-      Viernes: "",
+      lunes: "",
+      martes: "",
+      miercoles: "",
+      jueves: "",
+      viernes: "",
       periodoInicio: "",
       periodoFin: "",
       periodoEvaluaciones: "",
       vacaciones: "",
       inicioVacaciones: "",
       finVacaciones: "",
-      diasAsueto: 0,
       diasAsuetoInputs: [],
       cantidadAlumnos: "",
       nombreGrupo: "",
@@ -25,7 +24,7 @@ new Vue({
       alumnos: "",
       dias: "",
       diasAsueto: [],
-      vacacionesOptions: ["Sí", "No"],
+      vacacionesOptions: ["Si", "No"],
       horasPorDiaOptions: [0, 1, 2, 3, 4, 5],
     };
   },
@@ -134,7 +133,7 @@ new Vue({
       // Arreglos y variables de configuración
       const diasTimeStamp = []; // ? Arreglo las fechas de cada día de la lísta
       const diaSemestre = [];
-      const diasVacaciónes = [];
+      const diasVacaciones = [];
       const tbl = [];
       const diasFinales = []; // Areglo para los días fínales
 
@@ -146,13 +145,27 @@ new Vue({
 
       const startVacaciónes = this.inicioVacaciones;
       const endVacaciónes = this.finVacaciones;
-      const hayVacaciones = this.vacacionesOptions;
+      const hayVacaciones = this.vacaciones;
 
-      const horasLunes = 1;
-      const horasMartes = 2;
-      const horasMiercoles = 4;
-      const horasJueves = 3;
-      const horasViernes = 3;
+      console.log(hayVacaciones);
+
+      const horasLunes = +this.lunes || 0;
+      const horasMartes = +this.martes || 0;
+      const horasMiercoles = +this.miercoles || 0;
+      const horasJueves = +this.jueves || 0;
+      const horasViernes = +this.viernes || 0;
+
+      const diasAsueto = [...this.diasAsuetoInputs];
+
+      console.log(diasAsueto);
+
+      console.log(
+        horasLunes,
+        horasMartes,
+        horasMiercoles,
+        horasJueves,
+        horasViernes
+      );
 
       let fecha1 = new Date(startDateInput + "T00:00");
       const fecha2 = new Date(endDateInput + "T00:00");
@@ -189,7 +202,7 @@ new Vue({
           return;
         }
         // Generar los días del semestre
-        while (fecha1 < fecha2) {
+        while (fecha1 <= fecha2) {
           let unDiaEnMilisegundos = 24 * 60 * 60 * 1000;
           diasTimeStamp.push(fecha1.getTime());
           fecha1.setTime(fecha1.getTime() + unDiaEnMilisegundos);
@@ -204,21 +217,24 @@ new Vue({
         console.log(diasTimeStamp.length);
 
         if (hayVacaciones === "Si") {
-          while (vacaciones1 < vacaciones2) {
+          while (vacaciones1 <= vacaciones2) {
             let diasMilisegundos = 24 * 60 * 60 * 1000;
             // Almacenar cada día de las vacaciones dentro del arreglo
-            diasVacaciónes.push(vacaciones1.getTime());
+            diasVacaciones.push(vacaciones1.getTime());
             vacaciones1.setTime(vacaciones1.getTime() + diasMilisegundos);
           }
-
-          // Ahora filtramos los días del semestre excluyendo los días que se encunetren dentro de las vaciónes
-          diasFinales = diasTimeStamp.filter(
-            (dia) => !diasVacaciónes.includes(dia)
-          );
-        } else {
-          diasFinales.push(...diasTimeStamp);
         }
+        if (diasAsueto.length > 0) {
+          diasAsueto.forEach((dia) => {
+            diasVacaciones.push(new Date(dia.fecha + "T00:00").getTime());
+          });
+        }
+        console.log(diasVacaciones);
 
+        // Ahora filtramos los días del semestre excluyendo los días que se encunetren dentro de las vaciónes
+        diasFinales.push(
+          ...diasTimeStamp.filter((dia) => !diasVacaciones.includes(dia))
+        );
         console.log(diasFinales);
 
         //  La cantidad del arregllo se deifne deacuerdo a la cantidad indicada por el usuario
