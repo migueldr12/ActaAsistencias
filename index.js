@@ -170,16 +170,6 @@ new Vue({
                 return;
             }
 
-            if (!startDateInput || !endDateInput) {
-                alert("Por favor, ingrese las fechas de inicio y fin.");
-                return;
-            }
-
-            if (fecha2 < fecha1) {
-                alert("La fecha de fin debe ser posterior a la de inicio.");
-                return;
-            }
-
             // Arreglos y variables de configuración
             const diasTimeStamp = []; // ? Arreglo las fechas de cada día de la lísta
             const diaSemestre = [];
@@ -192,6 +182,11 @@ new Vue({
             // Obtener fechas de inicio y fin del semestre
             const startDateInput = this.periodoInicio;
             const endDateInput = this.periodoFin;
+
+            if (!startDateInput || !endDateInput) {
+                alert("Por favor, ingrese las fechas de inicio y fin.");
+                return;
+            }
 
             const startVacaciónes = this.inicioVacaciones;
             const endVacaciónes = this.finVacaciones
@@ -209,11 +204,12 @@ new Vue({
             console.log(hayVacaciones);
 
             // TODO Agrega esto:
-            const horasLunes = +this.lunes || 0;
-            const horasMartes = +this.martes || 0;
-            const horasMiercoles = +this.miercoles || 0;
-            const horasJueves = +this.jueves || 0;
-            const horasViernes = +this.viernes || 0;
+            const horasLunes = +this.horas['Lunes'] || 0;
+            const horasMartes = +this.horas['Martes'] || 0;
+            const horasMiercoles = +this.horas['Miércoles'] || 0;
+            const horasJueves = +this.horas['Jueves'] || 0;
+            const horasViernes = +this.horas['Viernes'] || 0;
+
 
 
             const diasAsueto = [...this.diasAsuetoInputs];
@@ -230,6 +226,11 @@ new Vue({
 
             let fecha1 = new Date(startDateInput + "T00:00");
             const fecha2 = new Date(endDateInput + "T00:00");
+
+            if (fecha2 < fecha1) {
+                alert("La fecha de fin debe ser posterior a la de inicio.");
+                return;
+            }
 
             let vacaciones1 = new Date(startVacaciónes + "T00:00");
             const vacaciones2 = new Date(endVacaciónes + "T00:00");
