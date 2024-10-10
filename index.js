@@ -1,3 +1,4 @@
+"use strict";
 new Vue({
   el: "#app",
   vuetify: new Vuetify(),
@@ -19,7 +20,7 @@ new Vue({
       alumnos: "",
       dias: "",
       diasAsueto: [],
-      vacacionesOptions: ["Sí", "No"],
+      vacacionesOptions: ["Si", "No"],
       horasPorDiaOptions: [0, 1, 2, 3, 4, 5],
     };
   },
@@ -114,16 +115,16 @@ new Vue({
       const diaSemestre = [];
       const diasVacaciónes = [];
       const tbl = [];
-      const diasFinales = []; // Areglo para los días fínales 
+      const diasFinales = []; // Areglo para los días fínales
 
       const alumnos = 24; // Cantidad de alumnos
 
       // Obtener fechas de inicio y fin del semestre
-      const startDateInput = this.startDate;
-      const endDateInput = this.endDate;
-      
-      const startVacaciónes = this.empiezaDatos;
-      const endVacaciónes = this.finalizaDatos;
+      const startDateInput = this.periodoInicio;
+      const endDateInput = this.periodoFin;
+
+      const startVacaciónes = this.inicioVacaciones;
+      const endVacaciónes = this.finVacaciones;
       const hayVacaciones = this.vacacionesOptions;
 
       const horasLunes = 1;
@@ -171,7 +172,7 @@ new Vue({
           let unDiaEnMilisegundos = 24 * 60 * 60 * 1000;
           diasTimeStamp.push(fecha1.getTime());
           fecha1.setTime(fecha1.getTime() + unDiaEnMilisegundos);
-        }        
+        }
         /*
         TODO
         ? Si las vacipones se incluyen en la fecha del semestre No incluir esas fechas en el arreglo del semestre
@@ -179,8 +180,10 @@ new Vue({
         ? Días de asuelto que sea un arreglo igual a la cantidad de días que se necesiten
         ? Estos se almacenaran en un arreglo y se buscara excluir esos datos del arreglo del semestre
         */
-        if (hayVacaciones == 'si') {
-          while(vacaciones1 < vacaciones2) {
+        console.log(diasTimeStamp.length);
+
+        if (hayVacaciones === "Si") {
+          while (vacaciones1 < vacaciones2) {
             let diasMilisegundos = 24 * 60 * 60 * 1000;
             // Almacenar cada día de las vacaciones dentro del arreglo
             diasVacaciónes.push(vacaciones1.getTime());
@@ -188,19 +191,23 @@ new Vue({
           }
 
           // Ahora filtramos los días del semestre excluyendo los días que se encunetren dentro de las vaciónes
-          diasFinales = diasTimeStamp.filter((dia) => !diasVacaciónes.includes(dia));
-
+          diasFinales = diasTimeStamp.filter(
+            (dia) => !diasVacaciónes.includes(dia)
+          );
+        } else {
+          diasFinales.push(...diasTimeStamp);
         }
+
+        console.log(diasFinales);
 
         //  La cantidad del arregllo se deifne deacuerdo a la cantidad indicada por el usuario
         // Y estos datos los lee por medio de un bucle for
         //  En lugar del ".values" se utiliza "this.(ide del elemento del vue.js)
 
-
         // Asignar los días hábiles al semestre
         // diasTimeStamp.forEach((ts) => {
-          // ? Ahora utilzaremos el arreglo con los días que no se filtraron 
-          diasFinales.forEach((ts) => {
+        // ? Ahora utilzaremos el arreglo con los días que no se filtraron
+        diasFinales.forEach((ts) => {
           const dia = new Date(ts).getDay();
           const numDia = new Date(ts).getDate();
           if (dia !== 0 && dia !== 6) {
