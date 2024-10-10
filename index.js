@@ -159,24 +159,23 @@ new Vue({
       const hayVacaciones = this.vacaciones;
 
       // * Obtenemos las fechas de las evaluaciónes:
-      const primeraFecha = this.getDayFromDate(this.primeraEvaluacion) || '07/10/2024';
-      const segundaFecha = this.getDayFromDate(this.segundaEvaluacion) || '14/10/2024';;
-      const terceraFecha = this.getDayFromDate(this.terceraEvaluacion) || '21/11/2024';
+      // const primeraFecha = this.getDayFromDate(this.primeraEvaluacion) || '07/10/2024';
+      // const segundaFecha = this.getDayFromDate(this.segundaEvaluacion) || '14/10/2024';;
+      // const terceraFecha = this.getDayFromDate(this.terceraEvaluacion) || '21/11/2024';
+
+      const primeraFecha = new Date('2024-10-15'); // Por ejemplo
+      const segundaFecha = new Date('2024-11-15');
+      const terceraFecha = new Date('2024-12-15');
 
       console.log(hayVacaciones);
 
       // TODO Agrega esto:
-      // const horasLunes = +this.lunes || 0;
-      // const horasMartes = +this.martes || 0;
-      // const horasMiercoles = +this.miercoles || 0;
-      // const horasJueves = +this.jueves || 0;
-      // const horasViernes = +this.viernes || 0;
+      const horasLunes = +this.lunes || 0;
+      const horasMartes = +this.martes || 0;
+      const horasMiercoles = +this.miercoles || 0;
+      const horasJueves = +this.jueves || 0;
+      const horasViernes = +this.viernes || 0;
 
-      const horasLunes = +this.lunes || 1;
-      const horasMartes = +this.martes || 1;
-      const horasMiercoles = +this.miercoles || 1;
-      const horasJueves = +this.jueves || 1;
-      const horasViernes = +this.viernes || 1;
 
       const diasAsueto = [...this.diasAsuetoInputs];
 
@@ -268,45 +267,43 @@ new Vue({
         // diasTimeStamp.forEach((ts) => {
         // ? Ahora utilzaremos el arreglo con los días que no se filtraron
         diasFinales.forEach((ts) => {
-          const dia = new Date(ts).getDay();  // 
-          const numDia = new Date(ts).getDate();  // * Variable con la informaicón de los días en la iteración
-          
-          // * Almacenamos los días de evaluaciónes 
-          if (dia !== 0 && dia !== 6) {
-            // Almacenamos los días de evaluación
-            if (numDia == primeraFecha) {
-              // diaSemestre.push("E1:(${numDia})");
-              diaSemestre.push("E1");
-            } else if (numDia == segundaFecha) {
-              // diaSemestre.push("E2:(${numDia})");
-              diaSemestre.push("E2");
-            } else if (numDia == segundaFecha) {
-              // diaSemestre.push("E3:(${numDia})");
-              diaSemestre.push("E3");
+          const fecha = new Date(ts);
+          const diaSemana = fecha.getDay();  
+          const fechaCompleta = fecha.toLocaleDateString(); // Formato completo (día/mes/año)
+        
+          if (diaSemana !== 0 && diaSemana !== 6) {  // Excluir fines de semana
+            if (fechaCompleta === primeraFecha.toLocaleDateString()) {
+              diaSemestre.push(`E1`); // Primera evaluación
+            } else if (fechaCompleta === segundaFecha.toLocaleDateString()) {
+              diaSemestre.push(`E2`); // Segunda evaluación
+            } else if (fechaCompleta === terceraFecha.toLocaleDateString()) {
+              diaSemestre.push(`E3`); // Tercera evaluación
             } else {
-              diaSemestre.push(numDia);
+              diaSemestre.push(fecha.getDate()); // Día normal
             }
-  
-            // Excluir fines de semana
-            switch (dia) {
+        
+            // Asignar horas por día
+            switch (diaSemana) {
               case 1:
-                agregarDiasAlSemestre(numDia, horasLunes);
+                agregarDiasAlSemestre(fecha.getDate(), horasLunes);
                 break;
               case 2:
-                agregarDiasAlSemestre(numDia, horasMartes);
+                agregarDiasAlSemestre(fecha.getDate(), horasMartes);
                 break;
               case 3:
-                agregarDiasAlSemestre(numDia, horasMiercoles);
+                agregarDiasAlSemestre(fecha.getDate(), horasMiercoles);
                 break;
               case 4:
-                agregarDiasAlSemestre(numDia, horasJueves);
+                agregarDiasAlSemestre(fecha.getDate(), horasJueves);
                 break;
               case 5:
-                agregarDiasAlSemestre(numDia, horasViernes);
+                agregarDiasAlSemestre(fecha.getDate(), horasViernes);
                 break;
             }
           }
         });
+        
+        
 
         // Actualizar la tabla
         setearTabla();
