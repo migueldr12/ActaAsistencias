@@ -49,6 +49,7 @@
                 </v-col>
                 <v-col cols="12" md="4">
                   <v-text-field
+                    id="startDate"
                     v-model="periodoInicio"
                     label="Inicio del Periodo"
                     type="date"
@@ -57,6 +58,7 @@
                 </v-col>
                 <v-col cols="12" md="4">
                   <v-text-field
+                    id="endDate"
                     v-model="periodoFin"
                     label="Fin del Periodo"
                     type="date"
@@ -140,7 +142,7 @@
                 </v-col>
               </v-row>
               <div class="text-center mt-3">
-                <v-btn @click="generarAsistencia">Generar Asistencia</v-btn>
+                <v-btn @click="mostrarTabla">Generar Asistencia</v-btn>
               </div>
             </v-container>
           </v-form>
@@ -159,36 +161,15 @@
           <table class="table table-bordered" id="tablaAsistencia">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Horas por Día</th>
-                <th>Inicio del Periodo</th>
-                <th>Fin del Periodo</th>
-                <th>Fecha de Evaluaciones</th>
-                <th>Vacaciones</th>
-                <th>Inicio Vacaciones</th>
-                <th>Fin Vacaciones</th>
-                <th>Días de Asueto</th>
-                <th>Cantidad de Alumnos</th>
-                <th>Nombre del Grupo</th>
-                <th>Nombre de la Materia</th>
-                <th>Nombre del Docente</th>
+                <th v-for="(dia, index) in dias" :key="index">{{ dia }}</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(alumno, index) in alumnos" :key="index">
-                <td>{{ index + 1 }}</td>
-                <td>{{ alumno.horasPorDia }}</td>
-                <td>{{ alumno.periodoInicio }}</td>
-                <td>{{ alumno.periodoFin }}</td>
-                <td>{{ alumno.periodoEvaluaciones }}</td>
-                <td>{{ alumno.vacaciones }}</td>
-                <td>{{ alumno.inicioVacaciones }}</td>
-                <td>{{ alumno.finVacaciones }}</td>
-                <td>{{ alumno.diasAsueto }}</td>
-                <td>{{ alumno.cantidadAlumnos }}</td>
-                <td>{{ alumno.nombreGrupo }}</td>
-                <td>{{ alumno.nombreMateria }}</td>
-                <td>{{ alumno.nombreDocente }}</td>
+                <td>{{ alumno[0] }}</td>
+                <td v-for="(asistencia, idx) in alumno.slice(1)" :key="idx">
+                  {{ asistencia }}
+                </td>
               </tr>
             </tbody>
           </table>
