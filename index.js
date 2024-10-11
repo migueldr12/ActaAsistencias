@@ -224,6 +224,7 @@ new Vue({
                 return inicio >= periodoInicio && fin <= periodoFin;
             };
         
+            
             if (!esRangoValido(inicioP1, finalP1)) {
                 alert("El rango de la primera evaluación está fuera del periodo de clases.");
                 return;
