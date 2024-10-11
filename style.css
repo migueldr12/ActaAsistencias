@@ -111,9 +111,9 @@ tr:nth-child(even) {
     font-weight: bold;
 }
 
-.table td {
-    background-color: white;
-}
+/* #colorAlumnos {
+    background-color: rgb(28, 119, 105);
+} */
 
 /* Asegurar que la tabla ocupe todo el ancho disponible y el contenido se ajuste */
 .table th,

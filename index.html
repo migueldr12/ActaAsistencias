@@ -53,7 +53,7 @@
                       required></v-text-field>
                   </v-col>
                   <v-col cols="12" md="6">
-                    <v-text-field v-model="InicioP2" label="Inicio parcial 2" type="date"
+                    <v-text-field v-model="inicioP2" label="Inicio parcial 2" type="date"
                       :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.terceraEvaluacion"
                       required></v-text-field>
                   </v-col>
@@ -147,6 +147,8 @@
         </v-form>
       </div>
 
+
+
       <!-- Tabla de Asistencias Generadas -->
       <div id="attendance-table" v-if="!showForm">
         <div class="row">
@@ -161,22 +163,35 @@
           <p>Grupo: {{ nombreGrupo }}</p>
           <p>Docente: {{ nombreDocente }}</p>
           <p>Materia: {{ nombreMateria }}</p>
+
+
           <table class="table table-bordered" id="tablaAsistencia">
+
             <thead>
               <tr>
-                <th v-for="(dia, index) in dias" :key="index">{{ dia }}</th>
+                <th 
+                v-for="(dia, index) in dias" 
+                :key="index">{{ dia }}
+              </th>
               </tr>
             </thead>
+
             <tbody>
               <tr v-for="(alumno, index) in alumnos" :key="index">
                 <td>{{ alumno[0] }}</td>
-                <td v-for="(asistencia, idx) in alumno.slice(1)" :key="idx">
+                <td 
+                v-for="(asistencia, idx) in alumno.slice(1)" 
+                :key="idx"
+                >
                   {{ asistencia.data }}
                 </td>
               </tr>
               </tr>
             </tbody>
+
           </table>
+
+
         </div>
       </div>
 

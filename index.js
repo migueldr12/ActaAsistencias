@@ -180,11 +180,26 @@ new Vue({
             const tbl = [];
             const diasFinales = []; // Areglo para los días fínales
 
-            const alumnos = 24; // Cantidad de alumnos
+            const alumnos = 10; // Cantidad de alumnos
+
 
             // Obtener fechas de inicio y fin del semestre
-            const startDateInput = this.periodoInicio;
-            const endDateInput = this.periodoFin;
+            // const startDateInput = new Date(this.periodoInicio);
+            // const endDateInput = new Date(this.periodoFin);
+            // const inicioP1 = new Date(this.inicioP1);
+            // const finalP1 = new Date(this.finalP1);
+            // const inicioP2 = new Date(this.inicioP2);
+            // const finalP2 = new Date(this.finalP2);
+            // const inicioP3 = new Date(this.inicioP3);
+            // const finalP3 = new Date(this.finalP3);
+            const startDateInput = '2024-10-04';
+            const endDateInput = '2024-11-01';
+            const inicioP1 = '2024-10-04';
+            const finalP1 = '2024-10-14';
+            const inicioP2 = '2024-10-15';
+            const finalP2 = '2024-10-24';
+            const inicioP3 = '2024-10-25';
+            const finalP3 = '2024-11-01';
 
             /*if (!startDateInput || !endDateInput) {
                 alert("Por favor, ingrese las fechas de inicio y fin.");
@@ -194,11 +209,6 @@ new Vue({
             const startVacaciónes = this.inicioVacaciones;
             const endVacaciónes = this.finVacaciones
             const hayVacaciones = this.vacaciones;
-
-            // * Obtenemos las fechas de las evaluaciónes:
-            // const primeraFecha = this.getDayFromDate(this.primeraEvaluacion) || '07/10/2024';
-            // const segundaFecha = this.getDayFromDate(this.segundaEvaluacion) || '14/10/2024';;
-            // const terceraFecha = this.getDayFromDate(this.terceraEvaluacion) || '21/11/2024';
 
             const primeraFecha = new Date('2024-10-15'); // Por ejemplo
             const segundaFecha = new Date('2024-11-15');
@@ -244,11 +254,11 @@ new Vue({
             const setearTabla = () => {
                 tbl.push(["Alumnos", ...diaSemestre]);
                 for (let i = 1; i <= alumnos; i++) {
-                    const row = [`Alumno ${i}`];
+                    const row = [`${i}`];
                     for (let j = 0; j < diaSemestre.length; j++) {
                         row.push({
-                            data: "",
-                            color: "#FFFFFF"
+                            data: "A",
+                            color: "#806213" // * Color de las celdas
                         }); // Celdas vacías para llenar después
                     }
                     tbl.push(row);
@@ -270,13 +280,8 @@ new Vue({
                     diasTimeStamp.push(fecha1.getTime());
                     fecha1.setTime(fecha1.getTime() + unDiaEnMilisegundos);
                 }
-                /*
-                TODO
-                ? Si las vacipones se incluyen en la fecha del semestre No incluir esas fechas en el arreglo del semestre
-        
-                ? Días de asuelto que sea un arreglo igual a la cantidad de días que se necesiten
-                ? Estos se almacenaran en un arreglo y se buscara excluir esos datos del arreglo del semestre
-                */
+                
+                /// TODO
                 console.log(diasTimeStamp.length);
 
                 if (hayVacaciones === "Si") {
@@ -300,30 +305,15 @@ new Vue({
                 );
                 console.log(diasFinales);
 
-                //  La cantidad del arregllo se deifne deacuerdo a la cantidad indicada por el usuario
-                // Y estos datos los lee por medio de un bucle for
-                //  En lugar del ".values" se utiliza "this.(ide del elemento del vue.js)
-
-                // Asignar los días hábiles al semestre
-                // diasTimeStamp.forEach((ts) => {
                 // ? Ahora utilzaremos el arreglo con los días que no se filtraron
                 diasFinales.forEach((ts) => {
                     const fecha = new Date(ts);
-                    const diaSemana = fecha.getDay();
-                    const fechaCompleta = fecha.toLocaleDateString(); // Formato completo (día/mes/año)
-
+                    const diaSemana = fecha.getDay(); // Obtiene el día de la semana
+                
                     if (diaSemana !== 0 && diaSemana !== 6) {  // Excluir fines de semana
-                        if (fechaCompleta === primeraFecha.toLocaleDateString()) {
-                            diaSemestre.push(`E1`); // Primera evaluación
-                        } else if (fechaCompleta === segundaFecha.toLocaleDateString()) {
-                            diaSemestre.push(`E2`); // Segunda evaluación
-                        } else if (fechaCompleta === terceraFecha.toLocaleDateString()) {
-                            diaSemestre.push(`E3`); // Tercera evaluación
-                        } else {
-                            diaSemestre.push(fecha.getDate()); // Día normal
-                        }
-
-                        // Asignar horas por día
+                        diaSemestre.push(fecha.getDate()); // Día normal
+                
+                        // Asignar horas por día según el día de la semana
                         switch (diaSemana) {
                             case 1:
                                 agregarDiasAlSemestre(fecha.getDate(), horasLunes);
