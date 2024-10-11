@@ -77,6 +77,18 @@ new Vue({
             };
         },
 
+        // colorFondo() {
+        //     if (fecha >= inicioP1 && fecha <= finalP1) {
+        //         return 'color-evaluacion1'; // Clase para la primera evaluación
+        //       } else if (fecha >= inicioP2 && fecha <= finalP2) {
+        //         return 'color-evaluacion2'; // Clase para la segunda evaluación
+        //       } else if (fecha >= inicioP3 && fecha <= finalP3) {
+        //         return 'color-evaluacion3'; // Clase para la tercera evaluación
+        //       } else {
+        //           // Clase para días normales o de asistencia
+        //           return 'color-default';
+        //       };
+        // },
         descargarPDF() {
             try {
                 const { jsPDF } = window.jspdf;
@@ -173,18 +185,6 @@ new Vue({
                 console.error("Error al generar el PDF:", error);
             }
         },
-        // colorFondo() {
-        //     if (fecha >= inicioP1 && fecha <= finalP1) {
-        //         return 'color-evaluacion1'; // Clase para la primera evaluación
-        //       } else if (fecha >= inicioP2 && fecha <= finalP2) {
-        //         return 'color-evaluacion2'; // Clase para la segunda evaluación
-        //       } else if (fecha >= inicioP3 && fecha <= finalP3) {
-        //         return 'color-evaluacion3'; // Clase para la tercera evaluación
-        //       } else {
-        //           // Clase para días normales o de asistencia
-        //           return 'color-default';
-        //       };
-        // },
         mostrarTabla() {
             // Validaciones de los campos obligatorios
             /*if (!this.periodoInicio || !this.periodoFin || !this.cantidadAlumnos || !this.nombreGrupo || !this.nombreMateria || !this.nombreDocente) {
@@ -219,52 +219,26 @@ new Vue({
             const inicioP3 = '2024-10-25';
             const finalP3 = '2024-11-01';
             
-            
-            // const esRangoValido = (inicio, fin) => {
-            //     return inicio >= periodoInicio && fin <= periodoFin;
-            // };
+            /*
+            const esRangoValido = (inicio, fin) => {
+                return inicio >= periodoInicio && fin <= periodoFin;
+            };
         
-            // if (!esRangoValido(inicioP1, finalP1)) {
-            //     alert("El rango de la primera evaluación está fuera del periodo de clases.");
-            //     return;
-            // }
-        
-            // if (!esRangoValido(inicioP2, finalP2)) {
-            //     alert("El rango de la segunda evaluación está fuera del periodo de clases.");
-            //     return;
-            // }
-        
-            // if (!esRangoValido(inicioP3, finalP3)) {
-            //     alert("El rango de la tercera evaluación está fuera del periodo de clases.");
-            //     return;
-            // }
-            
-            // Condicionales para determinar el color
-            if (fecha >= inicioP1 && fecha <= finalP1) {
-                claseColor = 'color-evaluacion1';
-            } else if (fecha >= inicioP2 && fecha <= finalP2) {
-                claseColor = 'color-evaluacion2';
-            } else if (fecha >= inicioP3 && fecha <= finalP3) {
-                claseColor = 'color-evaluacion3';
+            if (!esRangoValido(inicioP1, finalP1)) {
+                alert("El rango de la primera evaluación está fuera del periodo de clases.");
+                return;
             }
         
-            // Se puede usar switch para futuros casos si hay más tipos de evaluaciones
-            switch (claseColor) {
-                case 'color-evaluacion1':
-                break;
-                case 'color-evaluacion2':
-                break;
-                case 'color-evaluacion3':
-                break;
-                default:
-                    'color-default';
-                break;
+            if (!esRangoValido(inicioP2, finalP2)) {
+                alert("El rango de la segunda evaluación está fuera del periodo de clases.");
+                return;
             }
         
-          
-
-
-
+            if (!esRangoValido(inicioP3, finalP3)) {
+                alert("El rango de la tercera evaluación está fuera del periodo de clases.");
+                return;
+            }
+            */
 
             /*if (!startDateInput || !endDateInput) {
                 alert("Por favor, ingrese las fechas de inicio y fin.");
@@ -274,15 +248,6 @@ new Vue({
             const startVacaciónes = this.inicioVacaciones;
             const endVacaciónes = this.finVacaciones
             const hayVacaciones = this.vacaciones;
-
-            // * Obtenemos las fechas de las evaluaciónes:
-            // const primeraFecha = this.getDayFromDate(this.primeraEvaluacion) || '07/10/2024';
-            // const segundaFecha = this.getDayFromDate(this.segundaEvaluacion) || '14/10/2024';;
-            // const terceraFecha = this.getDayFromDate(this.terceraEvaluacion) || '21/11/2024';
-
-            // const primeraFecha = new Date('2024-10-15'); // Por ejemplo
-            // const segundaFecha = new Date('2024-11-15');
-            // const terceraFecha = new Date('2024-12-15');
 
             console.log(hayVacaciones);
 
@@ -320,7 +285,7 @@ new Vue({
                 }
             };
 
-            // Función para crear la tabla con los días y alumnos
+            // * Función para crear la tabla con los días y alumnos
             const setearTabla = () => {
                 tbl.push(["Alumnos", ...diaSemestre]);
                 for (let i = 1; i <= alumnos; i++) {
@@ -328,7 +293,7 @@ new Vue({
                     for (let j = 0; j < diaSemestre.length; j++) {
                         row.push({
                             data: "A",
-                            color: "#438e96",
+                            // color: "#438e96", // * Color de las celdas
                         }); // Celdas vacías para llenar después
                     }
                     tbl.push(row);
@@ -350,13 +315,8 @@ new Vue({
                     diasTimeStamp.push(fecha1.getTime());
                     fecha1.setTime(fecha1.getTime() + unDiaEnMilisegundos);
                 }
-                /*
-                TODO
-                ? Si las vacipones se incluyen en la fecha del semestre No incluir esas fechas en el arreglo del semestre
-        
-                ? Días de asuelto que sea un arreglo igual a la cantidad de días que se necesiten
-                ? Estos se almacenaran en un arreglo y se buscara excluir esos datos del arreglo del semestre
-                */
+
+                // TODO
                 console.log(diasTimeStamp.length);
 
                 if (hayVacaciones === "Si") {
@@ -391,17 +351,31 @@ new Vue({
                     const fecha = new Date(ts);
                     const diaSemana = fecha.getDay();
                     const fechaCompleta = fecha.toLocaleDateString(); // Formato completo (día/mes/año)
+                    let claseColor = 'color-default'; // Valor por defecto
+                    // let diaEvaluación;
+
 
                     if (diaSemana !== 0 && diaSemana !== 6) {  // Excluir fines de semana
-                        if (fechaCompleta === primeraFecha.toLocaleDateString()) {
-                            diaSemestre.push(`E1`); // Primera evaluación
-                        } else if (fechaCompleta === segundaFecha.toLocaleDateString()) {
-                            diaSemestre.push(`E2`); // Segunda evaluación
-                        } else if (fechaCompleta === terceraFecha.toLocaleDateString()) {
-                            diaSemestre.push(`E3`); // Tercera evaluación
-                        } else {
-                            diaSemestre.push(fecha.getDate()); // Día normal
-                        }
+                        // if (fechaCompleta === primeraFecha.toLocaleDateString()) {
+                        //     diaSemestre.push(`E1`); // Primera evaluación
+                        // } else if (fechaCompleta === segundaFecha.toLocaleDateString()) {
+                        //     diaSemestre.push(`E2`); // Segunda evaluación
+                        // } else if (fechaCompleta === terceraFecha.toLocaleDateString()) {
+                        //     diaSemestre.push(`E3`); // Tercera evaluación
+                        // } else {
+                        //     diaSemestre.push(fecha.getDate()); // Día normal
+                        // }
+
+                        // //
+                        // switch (diaEvaluación) {
+                        //     case diaSemestre.push('E1'):
+                                
+                        //         break;
+                        
+                        //     default:
+                        //         break;
+                        // }
+
 
                         // Asignar horas por día
                         switch (diaSemana) {
@@ -421,6 +395,30 @@ new Vue({
                                 agregarDiasAlSemestre(fecha.getDate(), horasViernes);
                                 break;
                         }
+
+
+                        // * Condicionales para determinar el color de la celda
+                        if (fecha >= inicioP1 && fecha <= finalP1) {
+                            claseColor = 'color-evaluacion1';
+                        } else if (fecha >= inicioP2 && fecha <= finalP2) {
+                            claseColor = 'color-evaluacion2';
+                        } else if (fecha >= inicioP3 && fecha <= finalP3) {
+                            claseColor = 'color-evaluacion3';
+                        }
+                    
+                        // Se puede usar switch para futuros casos si hay más tipos de evaluaciones
+                        switch (claseColor) {
+                            case 'color-evaluacion1':
+                            break;
+                            case 'color-evaluacion2':
+                            break;
+                            case 'color-evaluacion3':
+                            break;
+                            default:
+                                'color-default';
+                            break;
+                        }
+
                     }
                 });
 
