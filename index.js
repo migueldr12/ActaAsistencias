@@ -296,7 +296,7 @@ new Vue({
                     });
                 }
                 console.log(diasVacaciones);
-
+ 
                 // Ahora filtramos los días del semestre excluyendo los días que se encunetren dentro de las vaciónes
                 diasFinales.push(
                     ...diasTimeStamp.filter((dia) => !diasVacaciones.includes(dia))
