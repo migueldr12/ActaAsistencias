@@ -24,9 +24,12 @@ new Vue({
         periodoInicio: "",
         periodoFin: "",
 
-        primeraEvaluacion: "",
-        segundaEvaluacion: "",
-        terceraEvaluacion: "",
+        inicioP1: "",
+        finalP1: "",
+        inicioP2: "",
+        finalP2: "",
+        inicioP3: "",
+        finalP3: "",
 
         vacaciones: '',
         vacacionesOptions: ['Sí', 'No'],
@@ -165,10 +168,10 @@ new Vue({
         },
         mostrarTabla() {
             // Validaciones de los campos obligatorios
-            if (!this.periodoInicio || !this.periodoFin || !this.cantidadAlumnos || !this.nombreGrupo || !this.nombreMateria || !this.nombreDocente) {
+            /*if (!this.periodoInicio || !this.periodoFin || !this.cantidadAlumnos || !this.nombreGrupo || !this.nombreMateria || !this.nombreDocente) {
                 alert("Por favor, complete todos los campos obligatorios.");
                 return;
-            }
+            }*/
 
             // Arreglos y variables de configuración
             const diasTimeStamp = []; // ? Arreglo las fechas de cada día de la lísta
@@ -183,10 +186,10 @@ new Vue({
             const startDateInput = this.periodoInicio;
             const endDateInput = this.periodoFin;
 
-            if (!startDateInput || !endDateInput) {
+            /*if (!startDateInput || !endDateInput) {
                 alert("Por favor, ingrese las fechas de inicio y fin.");
                 return;
-            }
+            }*/
 
             const startVacaciónes = this.inicioVacaciones;
             const endVacaciónes = this.finVacaciones
@@ -227,11 +230,6 @@ new Vue({
             let fecha1 = new Date(startDateInput + "T00:00");
             const fecha2 = new Date(endDateInput + "T00:00");
 
-            if (fecha2 < fecha1) {
-                alert("La fecha de fin debe ser posterior a la de inicio.");
-                return;
-            }
-
             let vacaciones1 = new Date(startVacaciónes + "T00:00");
             const vacaciones2 = new Date(endVacaciónes + "T00:00");
 
@@ -248,7 +246,10 @@ new Vue({
                 for (let i = 1; i <= alumnos; i++) {
                     const row = [`Alumno ${i}`];
                     for (let j = 0; j < diaSemestre.length; j++) {
-                        row.push(""); // Celdas vacías para llenar después
+                        row.push({
+                            data: "",
+                            color: "#FFFFFF"
+                        }); // Celdas vacías para llenar después
                     }
                     tbl.push(row);
                 }

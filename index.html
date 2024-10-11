@@ -28,7 +28,7 @@
           <h3 class="mb-3 text-center">Registrar Asistencia</h3>
           <v-container>
             <v-row>
-              <div>
+              <div class="border border-2 border-black rounded-3">
                 <h6>Horas por Día</h6>
                 <v-row>
                   <v-col cols="12" md="2" v-for="dia in diasSemana" :key="dia">
@@ -38,87 +38,111 @@
                 </v-row>
               </div>
             </v-row>
-            <h6>Evaluaciónes</h6>
             <v-row>
-              <v-col cols="12" md="4">
-                <v-text-field v-model="primeraEvaluacion" label="Fecha de Evaluaciones" type="date"
-                  :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.primeraEvaluacion"
-                  required></v-text-field>
+              <v-col cols="12" md="6" class="border border-2 border-black rounded-3">
+                <h6>Evaluaciónes</h6>
+                <v-row>
+                  <v-col cols="12" md="6">
+                    <v-text-field v-model="inicioP1" label="Inicio parcial 1" type="date"
+                      :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.primeraEvaluacion"
+                      required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-text-field v-model="finalP1" label="Final parcial 1" type="date"
+                      :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.segundaEvaluacion"
+                      required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-text-field v-model="InicioP2" label="Inicio parcial 2" type="date"
+                      :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.terceraEvaluacion"
+                      required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-text-field v-model="finalP2" label="Final parcial 2" type="date"
+                      :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.primeraEvaluacion"
+                      required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-text-field v-model="inicioP3" label="Inicio parcial 3" type="date"
+                      :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.segundaEvaluacion"
+                      required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-text-field v-model="finalP3" label="Final parcial 3" type="date"
+                      :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.terceraEvaluacion"
+                      required></v-text-field>
+                  </v-col>
+                </v-row>
               </v-col>
-              <v-col cols="12" md="4">
-                <v-text-field v-model="segundaEvaluacion" label="Fecha de Evaluaciones" type="date"
-                  :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.segundaEvaluacion"
-                  required></v-text-field>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-text-field v-model="terceraEvaluacion" label="Fecha de Evaluaciones" type="date"
-                  :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.terceraEvaluacion"
-                  required></v-text-field>
-              </v-col>
-
-              <h6>Curso - Vacaciones</h6>
-              <v-col cols="12" md="4">
-                <v-text-field id="startDate" v-model="periodoInicio" label="Inicio del Periodo" type="date"
-                  :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.periodoInicio"
-                  required></v-text-field>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-text-field id="endDate" v-model="periodoFin" label="Fin del Periodo" type="date"
-                  :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.periodoFin" required></v-text-field>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-text-field v-model="diasAsueto" label="Días de Asueto" type="number" @input="generarInputsAsueto"
-                  :rules="[v => v > 0 || 'Debe ser un número positivo']" :error-messages="errores.diasAsueto"
-                  required></v-text-field>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-select v-model="vacaciones" :items="vacacionesOptions" label="¿Hay vacaciones intermedias?"
-                  :rules="[v => !!v || 'Selecciona una opción']" :error-messages="errores.vacaciones"
-                  required></v-select>
-              </v-col>
-              <v-col cols="12" md="4" v-if="vacaciones === 'Sí'">
-                <v-text-field v-model="inicioVacaciones" label="Inicio de Vacaciones" type="date"
-                  :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.inicioVacaciones"
-                  required></v-text-field>
-              </v-col>
-              <v-col cols="12" md="4" v-if="vacaciones === 'Sí'">
-                <v-text-field v-model="finVacaciones" label="Fin de Vacaciones" type="date"
-                  :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.finVacaciones"
-                  required></v-text-field>
+              <v-col cols="12" md="6" class="border border-2 border-black rounded-3">
+                <h6>Curso - Vacaciones</h6>
+                <v-row>
+                  <v-col cols="12" md="6">
+                    <v-text-field id="startDate" v-model="periodoInicio" label="Inicio del Periodo" type="date"
+                      :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.periodoInicio"
+                      required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-text-field id="endDate" v-model="periodoFin" label="Fin del Periodo" type="date"
+                      :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.periodoFin"
+                      required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-text-field v-model="diasAsueto" label="Días de Asueto" type="number" @input="generarInputsAsueto"
+                      :rules="[v => v > 0 || 'Debe ser un número positivo']" :error-messages="errores.diasAsueto"
+                      required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-select v-model="vacaciones" :items="vacacionesOptions" label="¿Hay vacaciones intermedias?"
+                      :rules="[v => !!v || 'Selecciona una opción']" :error-messages="errores.vacaciones"
+                      required></v-select>
+                  </v-col>
+                  <v-col cols="12" md="6" v-if="vacaciones === 'Sí'">
+                    <v-text-field v-model="inicioVacaciones" label="Inicio de Vacaciones" type="date"
+                      :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.inicioVacaciones"
+                      required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="6" v-if="vacaciones === 'Sí'">
+                    <v-text-field v-model="finVacaciones" label="Fin de Vacaciones" type="date"
+                      :rules="[v => !!v || 'Fecha requerida']" :error-messages="errores.finVacaciones"
+                      required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="6" v-for="(asueto, index) in diasAsuetoInputs" :key="index">
+                    <v-text-field v-model="asueto.fecha" label="Fecha del Día de Asueto" type="date"
+                      :rules="[v => !!v || 'Fecha requerida']" :error-messages="asueto.fechaError"
+                      required></v-text-field>
+                  </v-col>
+                </v-row>
               </v-col>
             </v-row>
             <v-row>
-              <v-col cols="12" md="4" v-for="(asueto, index) in diasAsuetoInputs" :key="index">
-                <v-text-field v-model="asueto.fecha" label="Fecha del Día de Asueto" type="date"
-                  :rules="[v => !!v || 'Fecha requerida']" :error-messages="asueto.fechaError" required></v-text-field>
-              </v-col>
+              <div class="border border-2 border-black rounded-3">
+                <h6>Datos de la clase</h6>
+                <v-row>
+                  <v-col cols="12" md="3">
+                    <v-text-field v-model="cantidadAlumnos" label="Cantidad de Alumnos" type="number"
+                      :rules="[v => v > 0 || 'Debe ser un número positivo']" :error-messages="errores.cantidadAlumnos"
+                      required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="3">
+                    <v-text-field v-model="nombreGrupo" label="Nombre del Grupo" :rules="[v => !!v || 'Requerido']"
+                      :error-messages="errores.nombreGrupo" required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="3">
+                    <v-text-field v-model="nombreMateria" label="Nombre de la Materia"
+                      :rules="[v => !!v || 'Requerido']" :error-messages="errores.nombreMateria"
+                      required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="3">
+                    <v-text-field v-model="nombreDocente" label="Nombre del Docente" :rules="[v => !!v || 'Requerido']"
+                      :error-messages="errores.nombreDocente" required></v-text-field>
+                  </v-col>
+                </v-row>
+              </div>
+              <div class="text-center mt-3">
+                <v-btn @click="mostrarTabla">Generar Asistencia</v-btn>
+              </div>
             </v-row>
-
-
-
-            <h6>Datos de la clase</h6>
-            <v-row>
-              <v-col cols="12" md="4">
-                <v-text-field v-model="cantidadAlumnos" label="Cantidad de Alumnos" type="number"
-                  :rules="[v => v > 0 || 'Debe ser un número positivo']" :error-messages="errores.cantidadAlumnos"
-                  required></v-text-field>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-text-field v-model="nombreGrupo" label="Nombre del Grupo" :rules="[v => !!v || 'Requerido']"
-                  :error-messages="errores.nombreGrupo" required></v-text-field>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-text-field v-model="nombreMateria" label="Nombre de la Materia" :rules="[v => !!v || 'Requerido']"
-                  :error-messages="errores.nombreMateria" required></v-text-field>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-text-field v-model="nombreDocente" label="Nombre del Docente" :rules="[v => !!v || 'Requerido']"
-                  :error-messages="errores.nombreDocente" required></v-text-field>
-              </v-col>
-            </v-row>
-            <div class="text-center mt-3">
-              <v-btn @click="mostrarTabla">Generar Asistencia</v-btn>
-            </div>
           </v-container>
         </v-form>
       </div>
@@ -147,7 +171,7 @@
               <tr v-for="(alumno, index) in alumnos" :key="index">
                 <td>{{ alumno[0] }}</td>
                 <td v-for="(asistencia, idx) in alumno.slice(1)" :key="idx">
-                  {{ asistencia }}
+                  {{ asistencia.data }}
                 </td>
               </tr>
               </tr>
