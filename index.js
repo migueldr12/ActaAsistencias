@@ -256,7 +256,7 @@ new Vue({
                     for (let j = 0; j < diaSemestre.length; j++) {
                         row.push({
                             data: "A",
-                            color: "#6a7fc1" // * Color de las celdas
+                            color: "#FFFFFF" // * Color de las celdas
                         }); // Celdas vacías para llenar después
                     }
                     tbl.push(row);
