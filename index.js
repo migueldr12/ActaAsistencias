@@ -151,6 +151,18 @@ new Vue({
                         // Agregar el título en cada página
                         addTitle(pdf, title);
                     },
+                    didDrawCell: (data) => {
+                        if (data.column.index > 0) { // Para no afectar el primer índice de columnas
+                          if (data.cell.raw === 'E1') {
+                            data.cell.styles.fillColor = [255, 0, 0]; // Color rojo para primera evaluación
+                          } else if (data.cell.raw === 'E2') {
+                            data.cell.styles.fillColor = [0, 255, 0]; // Color verde para segunda evaluación
+                          } else if (data.cell.raw === 'E3') {
+                            data.cell.styles.fillColor = [0, 0, 255]; // Color azul para tercera evaluación
+                          }
+                        }
+                      }
+                    
                 });
 
                 // Convertir el PDF a Blob
@@ -161,11 +173,18 @@ new Vue({
                 console.error("Error al generar el PDF:", error);
             }
         },
-
-        // Metodo para obtener el día del mes d euna fecha
-        getDayFromDate(date) {
-            return date ? new Date(date).getDate() : null;
-        },
+        // colorFondo() {
+        //     if (fecha >= inicioP1 && fecha <= finalP1) {
+        //         return 'color-evaluacion1'; // Clase para la primera evaluación
+        //       } else if (fecha >= inicioP2 && fecha <= finalP2) {
+        //         return 'color-evaluacion2'; // Clase para la segunda evaluación
+        //       } else if (fecha >= inicioP3 && fecha <= finalP3) {
+        //         return 'color-evaluacion3'; // Clase para la tercera evaluación
+        //       } else {
+        //           // Clase para días normales o de asistencia
+        //           return 'color-default';
+        //       };
+        // },
         mostrarTabla() {
             // Validaciones de los campos obligatorios
             /*if (!this.periodoInicio || !this.periodoFin || !this.cantidadAlumnos || !this.nombreGrupo || !this.nombreMateria || !this.nombreDocente) {
@@ -180,11 +199,72 @@ new Vue({
             const tbl = [];
             const diasFinales = []; // Areglo para los días fínales
 
-            const alumnos = 24; // Cantidad de alumnos
+            const alumnos = 14; // Cantidad de alumnos
 
             // Obtener fechas de inicio y fin del semestre
-            const startDateInput = this.periodoInicio;
-            const endDateInput = this.periodoFin;
+            // const startDateInput = new Date(this.periodoInicio);
+            // const endDateInput = new Date(this.periodoFin);
+            // const inicioP1 = new Date(this.inicioP1);
+            // const finalP1 = new Date(this.finalP1);
+            // const inicioP2 = new Date(this.inicioP2);
+            // const finalP2 = new Date(this.finalP2);
+            // const inicioP3 = new Date(this.inicioP3);
+            // const finalP3 = new Date(this.finalP3);
+            const startDateInput = '2024-10-04';
+            const endDateInput = '2024-11-01';
+            const inicioP1 = '2024-10-04';
+            const finalP1 = '2024-10-14';
+            const inicioP2 = '2024-10-15';
+            const finalP2 = '2024-10-24';
+            const inicioP3 = '2024-10-25';
+            const finalP3 = '2024-11-01';
+            
+            
+            // const esRangoValido = (inicio, fin) => {
+            //     return inicio >= periodoInicio && fin <= periodoFin;
+            // };
+        
+            // if (!esRangoValido(inicioP1, finalP1)) {
+            //     alert("El rango de la primera evaluación está fuera del periodo de clases.");
+            //     return;
+            // }
+        
+            // if (!esRangoValido(inicioP2, finalP2)) {
+            //     alert("El rango de la segunda evaluación está fuera del periodo de clases.");
+            //     return;
+            // }
+        
+            // if (!esRangoValido(inicioP3, finalP3)) {
+            //     alert("El rango de la tercera evaluación está fuera del periodo de clases.");
+            //     return;
+            // }
+            
+            // Condicionales para determinar el color
+            if (fecha >= inicioP1 && fecha <= finalP1) {
+                claseColor = 'color-evaluacion1';
+            } else if (fecha >= inicioP2 && fecha <= finalP2) {
+                claseColor = 'color-evaluacion2';
+            } else if (fecha >= inicioP3 && fecha <= finalP3) {
+                claseColor = 'color-evaluacion3';
+            }
+        
+            // Se puede usar switch para futuros casos si hay más tipos de evaluaciones
+            switch (claseColor) {
+                case 'color-evaluacion1':
+                break;
+                case 'color-evaluacion2':
+                break;
+                case 'color-evaluacion3':
+                break;
+                default:
+                    'color-default';
+                break;
+            }
+        
+          
+
+
+
 
             /*if (!startDateInput || !endDateInput) {
                 alert("Por favor, ingrese las fechas de inicio y fin.");
@@ -200,9 +280,9 @@ new Vue({
             // const segundaFecha = this.getDayFromDate(this.segundaEvaluacion) || '14/10/2024';;
             // const terceraFecha = this.getDayFromDate(this.terceraEvaluacion) || '21/11/2024';
 
-            const primeraFecha = new Date('2024-10-15'); // Por ejemplo
-            const segundaFecha = new Date('2024-11-15');
-            const terceraFecha = new Date('2024-12-15');
+            // const primeraFecha = new Date('2024-10-15'); // Por ejemplo
+            // const segundaFecha = new Date('2024-11-15');
+            // const terceraFecha = new Date('2024-12-15');
 
             console.log(hayVacaciones);
 
@@ -244,11 +324,11 @@ new Vue({
             const setearTabla = () => {
                 tbl.push(["Alumnos", ...diaSemestre]);
                 for (let i = 1; i <= alumnos; i++) {
-                    const row = [`Alumno ${i}`];
+                    const row = [` ${i}`];
                     for (let j = 0; j < diaSemestre.length; j++) {
                         row.push({
-                            data: "",
-                            color: "#FFFFFF"
+                            data: "A",
+                            color: "#438e96",
                         }); // Celdas vacías para llenar después
                     }
                     tbl.push(row);
@@ -354,6 +434,10 @@ new Vue({
             } else {
                 alert("Por favor ingrese las fechas.");
             }
+        },
+        // Metodo para obtener el día del mes d euna fecha
+        getDayFromDate(date) {
+            return date ? new Date(date).getDate() : null;
         },
     },
 });
