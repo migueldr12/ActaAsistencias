@@ -210,9 +210,7 @@ new Vue({
             const endVacaciónes = this.finVacaciones
             const hayVacaciones = this.vacaciones;
 
-            const primeraFecha = new Date('2024-10-15'); // Por ejemplo
-            const segundaFecha = new Date('2024-11-15');
-            const terceraFecha = new Date('2024-12-15');
+            let colorFondo
 
             console.log(hayVacaciones);
 
@@ -258,7 +256,7 @@ new Vue({
                     for (let j = 0; j < diaSemestre.length; j++) {
                         row.push({
                             data: "A",
-                            color: "#806213" // * Color de las celdas
+                            color: "#6a7fc1" // * Color de las celdas
                         }); // Celdas vacías para llenar después
                     }
                     tbl.push(row);

@@ -166,30 +166,20 @@
 
 
           <table class="table table-bordered" id="tablaAsistencia">
-
             <thead>
-              <tr>
-                <th 
-                v-for="(dia, index) in dias" 
-                :key="index">{{ dia }}
-              </th>
-              </tr>
+                <tr>
+                    <th v-for="(dia, index) in dias" :key="index">{{ dia }}</th>
+                </tr>
             </thead>
-
             <tbody>
-              <tr v-for="(alumno, index) in alumnos" :key="index">
-                <td>{{ alumno[0] }}</td>
-                <td 
-                v-for="(asistencia, idx) in alumno.slice(1)" 
-                :key="idx"
-                >
-                  {{ asistencia.data }}
-                </td>
-              </tr>
-              </tr>
+                <tr v-for="(alumno, index) in alumnos" :key="index">
+                    <td>{{ alumno[0] }}</td>
+                    <td v-for="(asistencia, idx) in alumno.slice(1)" :key="idx" :style="{ backgroundColor: asistencia.color }">
+                        {{ asistencia.data }}
+                    </td>
+                </tr>
             </tbody>
-
-          </table>
+        </table>
 
 
         </div>
